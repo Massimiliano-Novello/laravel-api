@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 return new class extends Migration
 {
     /**
@@ -15,9 +16,9 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('titolo', 150)->unique();
-            $table->string('slug');
+            $table->string('titolo', 200)->unique();
             $table->text('descrizione')->nullable();
+            $table->string('slug');
             $table->timestamps();
         });
     }
