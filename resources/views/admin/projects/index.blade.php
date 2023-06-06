@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <h1>Tutti i progetti</h1>
+        <a class="btn btn-primary" href="{{route('admin.projects.create')}}">Aggiungi un nuovo progetto</a>
         <table class="table">
             <thead>
                 <tr>
@@ -24,6 +25,16 @@
                             <a class="btn btn-success" href="{{ route('admin.projects.show', $project->slug) }}">
                                 <i class="fa-solid fa-eye"></i>
                             </a>
+                            <a class="btn btn-warning" href="{{ route('admin.projects.edit', $project->slug) }}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <form action="{{route('admin.projects.destroy', $project->slug)}}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

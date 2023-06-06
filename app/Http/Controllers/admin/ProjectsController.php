@@ -40,7 +40,7 @@ class ProjectsController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $data['slug'] = Str::slug($data['title']);
+        $data['slug'] = Str::slug($data['titolo']);
         $project = Projects::create($data);
         return redirect()->route('admin.projects.index');
     }
@@ -64,7 +64,7 @@ class ProjectsController extends Controller
      */
     public function edit(Projects $projects)
     {
-        //
+        return view ('admin.projects.edit', compact('projects'));
     }
 
     /**
@@ -76,7 +76,10 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, Projects $projects)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['titolo']);
+        $projects->update($data);
+        return redirect()->route('admin.projects.index');
     }
 
     /**
@@ -87,6 +90,7 @@ class ProjectsController extends Controller
      */
     public function destroy(Projects $projects)
     {
-        //
+        $projects->delete();
+        return redirect()->route('admin.projects.index');
     }
 }
