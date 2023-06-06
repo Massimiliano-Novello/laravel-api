@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Projects;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
+use Illuminate\Support\Str;
 
 class ProjectsController extends Controller
 {
@@ -27,7 +28,7 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -38,7 +39,10 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['title']);
+        $project = Projects::create($data);
+        return redirect()->route('admin.projects.index');
     }
 
     /**
