@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProjectsRequest;
+use App\Http\Requests\UpdateProjectsRequest;
 use App\Models\Projects;
 use App\Models\Type;
 use Illuminate\Http\Request;
@@ -39,9 +41,9 @@ class ProjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectsRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['slug'] = Str::slug($data['titolo']);
         $project = Projects::create($data);
         return redirect()->route('admin.projects.index');
@@ -77,9 +79,9 @@ class ProjectsController extends Controller
      * @param  \App\Models\Projects  $projects
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Projects $projects)
+    public function update(UpdateProjectsRequest $request, Projects $projects)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $data['slug'] = Str::slug($data['titolo']);
         $projects->update($data);
         return redirect()->route('admin.projects.index');
