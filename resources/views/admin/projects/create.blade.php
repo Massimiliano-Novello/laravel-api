@@ -12,7 +12,7 @@
         <select class="form-select" id="type" aria-label="Default select example" name="type_id">
             <option selected value=""></option>
             @foreach ($types as $type)
-            <option value="{{$type->id}}">{{ $type->nome }}</option>
+            <option @selected(old('type_id') == $type->id) value="{{$type->id}}">{{ $type->nome }}</option>
             @endforeach
         </select>
 

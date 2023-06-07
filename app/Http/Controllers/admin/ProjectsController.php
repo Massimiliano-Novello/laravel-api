@@ -66,7 +66,8 @@ class ProjectsController extends Controller
      */
     public function edit(Projects $projects)
     {
-        return view ('admin.projects.edit', compact('projects'));
+        $types = Type::all();
+        return view ('admin.projects.edit', compact('projects', 'types'));
     }
 
     /**
