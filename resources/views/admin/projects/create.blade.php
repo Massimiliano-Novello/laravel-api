@@ -22,13 +22,13 @@
         </select>
 
         <div class="mb-3">
-            <label for="technology">Seleziona la tecnologia</label>
-            <select class="form-select" id="technology" aria-label="Default select example" name="type_id">
-                <option selected value=""></option>
-                @foreach ($technologies as $technology)
-                    <option @selected(old('technology_id') == $technology->id) value="{{ $technology->id }}">{{ $technology->nome }}</option>
-                @endforeach
-            </select>
+            @foreach ($technologies as $technology)
+                <div class="form-check">
+                    <input type="checkbox" id="technology-{{ $technology->id }}" name="technologies[]"
+                        class="form-check-input" value="{{ $technology->id }}" @checked(in_array($technology->id, old('technologies', [])))>
+                    <label class="form-check-label" for="technology-{{ $technology->id }}">{{ $technology->nome }}</label>
+                </div>
+            @endforeach
         </div>
 
         <div class="mb-3">

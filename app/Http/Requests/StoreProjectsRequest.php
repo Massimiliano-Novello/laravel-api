@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Exists;
 
 class StoreProjectsRequest extends FormRequest
 {
@@ -28,7 +29,7 @@ class StoreProjectsRequest extends FormRequest
             'titolo' => ['required', 'max:150', Rule::unique('projects')],
             'descrizione' => 'nullable',
             'type_id' => 'nullable',
-            'technlogy_id' => 'nullable'
+            'technlogy_id' => ['nullable', 'exists:technologies,id']
         ];
     }
 }
