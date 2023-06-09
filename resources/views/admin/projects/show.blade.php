@@ -7,6 +7,11 @@
 
     <div>
         <h5>Tecnologie usate</h5>
-        <p>{{ $projects->technology?->nome }}</p>
+        
+        @forelse ($projects->technologies as $technology)
+            <p>{{ $technology->nome }}</p>
+        @empty
+            <p>nessuna tecnologia</p>
+        @endforelse
     </div>
 @endsection

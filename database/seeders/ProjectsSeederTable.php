@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Projects;
+use App\Models\Project;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
-class ProjectsSeeder extends Seeder
+class ProjectsSeederTable extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,7 @@ class ProjectsSeeder extends Seeder
     public function run(Faker $faker)
     {
         for ($i = 0; $i < 10; $i++) {
-            $projects = new Projects();
+            $projects = new Project();
             $projects->titolo = $faker->sentence(3);
             $projects->descrizione =$faker->text();
             $projects->slug = Str::slug($projects->titolo, '-');

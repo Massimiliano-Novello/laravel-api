@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectsRequest;
 use App\Http\Requests\UpdateProjectsRequest;
-use App\Models\Projects;
+use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
+// use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 use Illuminate\Support\Str;
 
 class ProjectsController extends Controller
@@ -21,7 +21,7 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $projects = Projects::all();
+        $projects = Project::all();
         return view ('admin.projects.index', compact('projects'));
     }
 
@@ -47,7 +47,7 @@ class ProjectsController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($data['titolo']);
-        $project = Projects::create($data);
+        $project = Project::create($data);
         return redirect()->route('admin.projects.index');
 
         if($request->has('technologies')) {
@@ -61,7 +61,7 @@ class ProjectsController extends Controller
      * @param  \App\Models\Projects  $projects
      * @return \Illuminate\Http\Response
      */
-    public function show(Projects $projects)
+    public function show(Project $projects)
     {
         return view('admin.projects.show', compact('projects'));
     }
@@ -72,7 +72,7 @@ class ProjectsController extends Controller
      * @param  \App\Models\Projects  $projects
      * @return \Illuminate\Http\Response
      */
-    public function edit(Projects $projects)
+    public function edit(Project $projects)
     {
         $types = Type::all();
         $technologies = Technology::all();
@@ -86,7 +86,7 @@ class ProjectsController extends Controller
      * @param  \App\Models\Projects  $projects
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProjectsRequest $request, Projects $projects)
+    public function update(UpdateProjectsRequest $request, Project $projects)
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($data['titolo']);
@@ -100,7 +100,7 @@ class ProjectsController extends Controller
      * @param  \App\Models\Projects  $projects
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Projects $projects)
+    public function destroy(Project $projects)
     {
         $projects->delete();
         return redirect()->route('admin.projects.index');
