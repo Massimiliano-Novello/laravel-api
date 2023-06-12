@@ -91,6 +91,12 @@ class ProjectsController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::slug($data['titolo']);
         $projects->update($data);
+        // Collegamento con technologies
+        if($request->has('technologies')) {
+            $projects->technologies()->sync($request->technologies);
+        } else {
+            $projects->technologies()->detuch();
+        }
         return redirect()->route('admin.projects.index');
     }
 
